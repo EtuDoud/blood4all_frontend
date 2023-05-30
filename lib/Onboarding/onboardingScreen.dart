@@ -1,4 +1,5 @@
-import 'package:blood4all/Modals/OnboardingModals.dart';
+import 'package:blood4all/Models/Onboarding_Models.dart';
+import 'package:blood4all/Screens/Login/login.dart';
 import 'package:blood4all/Widgets/dotindicator.dart';
 import 'package:flutter/material.dart';
 
@@ -21,25 +22,25 @@ class OnboardingScreenState extends State<OnboardingScreen> {
           child: Stack(
         children: [
           Container(
-            margin:
+            padding:
                 const EdgeInsets.only(top: 32, left: 32, right: 32, bottom: 10),
             child: Column(children: [
               Image.asset("assets/images/logo.png"),
               const SizedBox(
                 height: 32,
               ),
-              SizedBox( 
+              SizedBox(
                 height: size.height / 1.0,
                 width: size.width,
                 child: PageView.builder(
-                  itemCount: onboardingModals.length,
+                  itemCount: onboardingModels.length,
                   onPageChanged: (value) {
                     setState(() {
                       currentIndex = value;
                     });
                   },
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                     child: Stack(
                       children: [
                         Column(
@@ -52,14 +53,14 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                                   Stack(
                                     children: [
                                       Image.asset(
-                                          onboardingModals[index].imagePath)
+                                          onboardingModels[index].imagePath)
                                     ],
                                   ),
                                   const SizedBox(
                                     height: 32,
                                   ),
                                   Text(
-                                    onboardingModals[index].title,
+                                    onboardingModels[index].title,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 24,
@@ -69,7 +70,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                                   const SizedBox(
                                     height: 8,
                                   ),
-                                  Text(onboardingModals[index].subTitle,
+                                  Text(onboardingModels[index].subTitle,
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w400,
@@ -102,7 +103,11 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                               height: 48,
                             ),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                if(currentIndex == 2) {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
+                                }
+                              },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xffEF4923),
                                   padding: const EdgeInsets.only(
