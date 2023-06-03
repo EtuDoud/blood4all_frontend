@@ -17,7 +17,7 @@ class CustomTextField  extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: inputType,
-      decoration: InputDecoration(hintText: placeholder, prefixStyle: const TextStyle(color: Color(0x4D596B), fontSize: 14, fontWeight: FontWeight.w400) ),
+      decoration: InputDecoration(hintText: placeholder, border: InputBorder.none, prefixStyle: const TextStyle(color: Color(0x4D596B), fontSize: 14, fontWeight: FontWeight.w400) ),
       enabled: enabled,
       minLines: minLines,
       maxLines: maxLines,

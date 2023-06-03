@@ -1,4 +1,6 @@
 import 'package:blood4all/Onboarding/onboardingScreen.dart';
+import 'package:blood4all/Screens/Signup/signup.dart';
+import 'package:blood4all/Screens/SplashScreen/splashscreen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         color: Colors.amber,
         debugShowCheckedModeBanner: false,
-        home: OnboardingScreen());
+        home: SplashScreen());
   }
 }
 
