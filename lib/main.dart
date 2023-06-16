@@ -1,12 +1,11 @@
-import 'package:blood4all/Onboarding/onboardingScreen.dart';
-import 'package:blood4all/Screens/ResearchScreen/search.dart';
-import 'package:blood4all/Screens/Signup/signup.dart';
-import 'package:blood4all/Screens/SplashScreen/splashscreen.dart';
+
+import 'package:blood4all/Screens/resultScreen/result.dart';
+
+
 
 import 'package:flutter/material.dart';
 
-import 'Screens/Login/login.dart';
-import 'Screens/resultScreen/result.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         color: Colors.amber,
         debugShowCheckedModeBanner: false,
-        home: SearchScreen());
+        home: ResultScreen());
   }
 }
 
