@@ -1,12 +1,13 @@
-import 'package:blood4all/Onboarding/onboardingScreen.dart';
-import 'package:blood4all/Screens/ResearchScreen/search.dart';
-import 'package:blood4all/Screens/Signup/signup.dart';
-import 'package:blood4all/Screens/SplashScreen/splashscreen.dart';
+
+import 'package:blood4all/Screens/resultScreen/result.dart';
+
+
 
 import 'package:flutter/material.dart';
 
 import 'Screens/AlternativeScreen/alternativeScreen.dart';
 import 'Screens/Login/login.dart';
+import 'Screens/Signup/signup.dart';
 import 'Screens/qrcode_screen/qrcode_screen.dart';
 import 'Screens/resultScreen/result.dart';
 
