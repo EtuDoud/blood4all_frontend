@@ -1,6 +1,8 @@
 import 'package:blood4all/Screens/Login/Widgets/textField.dart';
 import 'package:flutter/material.dart';
 
+import '../../Models/blood_info.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -128,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           Container(
                               height: 200,
                               child: GridView.builder(
-                                itemCount: groupe.length,
+                                itemCount: BloodInfo.groupeSanguin.length,
                                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 4,
                                   crossAxisSpacing: 10,
@@ -138,15 +140,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                 return GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      active = !active;
+                                      BloodInfo.groupeSanguin[index].active = !BloodInfo.groupeSanguin[index].active;
                                     });
                                   },
                                   child: SizedBox(
                                     height: 30,
                                     width: 30,
                                     child: Container(
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: active?Color(0xffDD989E):Color(0xffE9EEF6) ),
-                                        child: Center(child: Text(groupe[index], style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),)),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: BloodInfo.groupeSanguin[index].active?Color(0xffDD989E):Color(0xffE9EEF6) ),
+                                        child: Center(child: Text(BloodInfo.groupeSanguin[index].groupe, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),)),
                                       ),
                                     ),
                                 );

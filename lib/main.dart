@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'Screens/AlternativeScreen/alternativeScreen.dart';
 import 'Screens/Login/login.dart';
+import 'Screens/qrcode_screen/qrcode_screen.dart';
 import 'Screens/resultScreen/result.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         color: Colors.amber,
         debugShowCheckedModeBanner: false,
-        home: SearchScreen());
+        home: QrcodeScreen());
   }
 }
 
