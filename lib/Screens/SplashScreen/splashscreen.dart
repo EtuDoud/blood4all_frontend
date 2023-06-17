@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Image(image: AssetImage("assets/images/OnboardLogo.png"),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             const SpinKitThreeBounce(
               color: Colors.red,

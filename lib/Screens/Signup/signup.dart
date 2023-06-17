@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../Login/Widgets/password_field.dart';
+import '../Login/login.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -186,7 +187,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 GestureDetector(
                     onTap: (){
-
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
                     },
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
