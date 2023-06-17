@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         color: Colors.amber,
         debugShowCheckedModeBanner: false,
-        home: QrcodeScreen());
+        home: SignupScreen());
   }
 }
 
