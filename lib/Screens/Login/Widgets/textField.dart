@@ -10,7 +10,7 @@ String Function (String?)? validator,}) {
       keyboardType: inputType,
       decoration: InputDecoration(
           hintText: text,
-          hintStyle: TextStyle(color: Colors.black),
+          hintStyle: TextStyle(color: Color(0xff767676)),
 
           focusedBorder: InputBorder.none
       ),

@@ -5,6 +5,7 @@ import 'package:blood4all/Screens/SplashScreen/splashscreen.dart';
 
 import 'package:flutter/material.dart';
 
+import 'Screens/AlternativeScreen/alternativeScreen.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/resultScreen/result.dart';
 
