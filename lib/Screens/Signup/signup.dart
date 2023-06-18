@@ -32,7 +32,22 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Container(),
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: "Medecin", ),
+              Tab(text: "Utilisateur", ),
+              Tab(text: "Bank de sang",),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            UserSignupScreen()
+          ],
+        ),
+      ),
     );
 
   }
