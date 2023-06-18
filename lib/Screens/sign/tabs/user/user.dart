@@ -1,26 +1,20 @@
-
+import 'package:blood4all/Screens/Login/Widgets/password_field.dart';
+import 'package:blood4all/Screens/Login/Widgets/text_field.dart';
+import 'package:blood4all/Screens/Login/login.dart';
 import 'package:flutter/material.dart';
 
-import '../Login/Widgets/password_field.dart';
-import '../Login/Widgets/text_field.dart';
-import '../Login/login.dart';
 
-class BankSignupScreen extends StatefulWidget {
-  const BankSignupScreen({Key? key}) : super(key: key);
+class UserSignUp extends StatefulWidget {
+  const UserSignUp({
+    super.key,
+  });
 
   @override
-  State<BankSignupScreen> createState() => _BankSignupScreenState();
+  State<UserSignUp> createState() => _UserSignUpState();
 }
 
-class _BankSignupScreenState extends State<BankSignupScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    key = LabeledGlobalKey<FormState> ("LOGIN");
-  }
-
-  late String email;
+class _UserSignUpState extends State<UserSignUp> {
+ late String email;
   late String name;
   late String telephone; // ajouter la validation du numero de telephone
   late String matricule;
@@ -28,9 +22,16 @@ class _BankSignupScreenState extends State<BankSignupScreen> {
   bool passwordVisible = true;
   late LabeledGlobalKey<FormState> key;
 
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    key = LabeledGlobalKey<FormState> ("SIGNUP");
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body:  Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -44,14 +45,7 @@ class _BankSignupScreenState extends State<BankSignupScreen> {
                 const SizedBox(
                   height: 23,
                 ),
-                const Text(
-                  "Inscription",
-                  style: TextStyle(
-                    color: Color(0xFF12233D),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24,
-                  ),
-                ),
+              
                 const SizedBox(
                   height: 60,
                 ),
@@ -219,6 +213,8 @@ class _BankSignupScreenState extends State<BankSignupScreen> {
           ),
         ),
       ),
-    );
+ 
+        );
+
   }
 }

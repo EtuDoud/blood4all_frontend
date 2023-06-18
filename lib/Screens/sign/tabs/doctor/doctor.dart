@@ -1,24 +1,19 @@
-
+import 'package:blood4all/Screens/Login/Widgets/password_field.dart';
+import 'package:blood4all/Screens/Login/Widgets/text_field.dart';
+import 'package:blood4all/Screens/Login/login.dart';
 import 'package:flutter/material.dart';
 
-import '../Login/Widgets/password_field.dart';
-import '../Login/Widgets/text_field.dart';
-import '../Login/login.dart';
 
-class UserSignupScreen extends StatefulWidget {
-  const UserSignupScreen({Key? key}) : super(key: key);
+
+
+class DoctorSignUp extends StatefulWidget {
+  const DoctorSignUp({Key? key}) : super(key: key);
 
   @override
-  State<UserSignupScreen> createState() => _UserSignupScreen();
+  State<DoctorSignUp> createState() => _DoctorSignUpState();
 }
 
-class _UserSignupScreen extends State<UserSignupScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    key = LabeledGlobalKey<FormState> ("LOGIN");
-  }
+class _DoctorSignUpState extends State<DoctorSignUp> {
 
   late String email;
   late String name;
@@ -27,10 +22,19 @@ class _UserSignupScreen extends State<UserSignupScreen> {
   late String password;
   bool passwordVisible = true;
   late LabeledGlobalKey<FormState> key;
+ 
 
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    key = LabeledGlobalKey<FormState> ("SIGNUP");
+  }
+  @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
-      body: Container(
+      body:  Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -44,14 +48,7 @@ class _UserSignupScreen extends State<UserSignupScreen> {
                 const SizedBox(
                   height: 23,
                 ),
-                const Text(
-                  "Inscription",
-                  style: TextStyle(
-                    color: Color(0xFF12233D),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24,
-                  ),
-                ),
+              
                 const SizedBox(
                   height: 60,
                 ),
@@ -186,39 +183,41 @@ class _UserSignupScreen extends State<UserSignupScreen> {
                   height: 10,
                 ),
                 GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Vous aviez un compte',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ) ,
-                        textAlign: TextAlign.center,
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
+                    },
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Vous aviez un compte',
+                            style: TextStyle(
+                              fontSize: 12,
+                            ) ,
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Connexion',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: 12,
+                              color: Colors.blue,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Connexion',
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 12,
-                          color: Colors.blue,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
               ],
             ),
           ),
         ),
       ),
-    );
+ 
+        );
+
   }
 }

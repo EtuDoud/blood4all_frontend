@@ -8,25 +8,29 @@ class BloodModel {
   final String bloodGroup;
   final BloodBank bloodBank;
   final String delayTime;
-  BloodModel({
-    required this.id,
-    required this.bloodGroup,
-    required this.bloodBank,
-    required this.delayTime
-  });
+  final bool isAvailable;
+  BloodModel(
+      {required this.id,
+      this.isAvailable=false,
+      required this.bloodGroup,
+      required this.bloodBank,
+      required this.delayTime});
 
-  BloodModel copyWith({
-    String? id,
-    String? bloodGroup,
-    BloodBank? bloodBank,
-    String? delayTime
-  }) {
+  BloodModel copyWith(
+      {String? id,
+      String? bloodGroup,
+      BloodBank? bloodBank,
+      String? delayTime,
+      bool? isAvailable
+      }) {
     return BloodModel(
-      id: id ?? this.id,
-      bloodGroup: bloodGroup ?? this.bloodGroup,
-      bloodBank: bloodBank ?? this.bloodBank,
-      delayTime: delayTime?? this.delayTime
-    );
+        id: id ?? this.id,
+        bloodGroup: bloodGroup ?? this.bloodGroup,
+        bloodBank: bloodBank ?? this.bloodBank,
+        delayTime: delayTime ?? this.delayTime,
+        
+        isAvailable: isAvailable?? this.isAvailable
+        );
   }
 
   Map<String, dynamic> toMap() {
@@ -34,17 +38,21 @@ class BloodModel {
       'id': id,
       'bloodGroup': bloodGroup,
       'bloodBank': bloodBank.toMap(),
-      'delayTime':delayTime
+      'delayTime': delayTime,
+      'isAvailable':isAvailable
     };
   }
 
   factory BloodModel.fromMap(Map<String, dynamic> map) {
     return BloodModel(
-      id: map['id'] as String,
-      bloodGroup: map['bloodGroup'] as String,
-      bloodBank: BloodBank.fromMap(map['bloodBank'] as Map<String, dynamic>),
-      delayTime: map['delayTime'] as String
-    );
+        id: map['id'] as String,
+        bloodGroup: map['bloodGroup'] as String,
+        bloodBank: BloodBank.fromMap(map['bloodBank'] as Map<String, dynamic>),
+        delayTime: map['delayTime'] as String,
+        
+        isAvailable: map['isAvailable'] as bool
+        
+        );
   }
 
   String toJson() => json.encode(toMap());
@@ -54,7 +62,7 @@ class BloodModel {
 
   @override
   String toString() =>
-      'BloodModel(id: $id, bloodGroup: $bloodGroup, bloodBank: $bloodBank, delayTime: $delayTime)';
+      'BloodModel(id: $id, isAvalable:$isAvailable,bloodGroup: $bloodGroup, bloodBank: $bloodBank, delayTime: $delayTime)';
 
   @override
   bool operator ==(covariant BloodModel other) {
@@ -72,23 +80,36 @@ class BloodModel {
     BloodModel(
         id: "1",
         bloodGroup: "A+",
-        bloodBank:
-            BloodBank(id: "2", name: "Cotonou Blood Express", adresse: "20"), delayTime: '50'),
+        bloodBank: BloodBank(
+            id: "2",
+            name: "Cotonou Blood Express",
+            adresse: "250 rue de l'amzon"),
+        delayTime: '50',
+        isAvailable: true
+        ),
     BloodModel(
         id: "2",
-        bloodGroup: "B+",
-        delayTime: "20",
-        bloodBank:
-            BloodBank(id: "2", name: "Cotonou Blood Express", adresse: "20")),
-    BloodModel(
-        id: "3",
         bloodGroup: "AB+",
         delayTime: "10",
-        bloodBank: BloodBank(id: "3", name: "Calavi Blood ", adresse: "10")),
+        bloodBank: BloodBank(
+            id: "3", name: "Calavi Blood ", adresse: "En face de l'UAC")),
     BloodModel(
-      delayTime: "50",
+        id: "3",
+        bloodGroup: "B+",
+        delayTime: "20",
+        bloodBank: BloodBank(
+            id: "2",
+            name: "Cotonou Blood Express",
+            
+            adresse: "250 rue de l'amzon"),
+            isAvailable: false
+            
+            ),
+    BloodModel(
+        delayTime: "50",
         id: "4",
         bloodGroup: "A-",
-        bloodBank: BloodBank(id: "2", name: "Calavi Blood", adresse: "10"))
+        bloodBank: BloodBank(
+            id: "2", name: "Calavi Blood", adresse: "En face de l'UAC"))
   ];
 }

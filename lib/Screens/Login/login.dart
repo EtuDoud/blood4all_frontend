@@ -1,8 +1,8 @@
-import 'package:blood4all/Screens/Login/Widgets/password_field.dart';
-import 'package:blood4all/Screens/Login/Widgets/text_field.dart';
+
+import 'package:blood4all/Screens/sign/signUp.dart';
 import 'package:flutter/material.dart';
 
-import '../Signup/signup.dart';
+
 import 'Widgets/textField.dart';
 
 class   LoginScreen extends StatefulWidget {
@@ -102,7 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             fixedSize: const Size(279, 56),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50))),
-                        onPressed: () {  },
+                        onPressed: () { 
+                          
+                         },
                         child: const Text(
                           "Envoyez",
                           textAlign: TextAlign.center,
@@ -117,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignupScreen(),));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpScreen(),));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
