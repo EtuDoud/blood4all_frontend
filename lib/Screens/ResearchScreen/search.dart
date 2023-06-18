@@ -1,4 +1,6 @@
-import 'package:blood4all/Screens/Login/Widgets/textField.dart';
+
+import 'package:blood4all/Screens/resultScreen/widgets/fields/search_bar.dart';
+import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
 import 'package:flutter/material.dart';
 
 import '../../Models/blood_info.dart';
@@ -62,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child:  FormTextField(text: "Volum",)
+                              child:  SearchBar( searchText: 'Volum',)
                           ),
                         ],
                       ),
@@ -81,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     borderRadius: BorderRadius.circular(30.0)
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child:  FormTextField(text: "Email",)
+                                child: CustomTextField(hintText: "Email",)
                             ),
                           ],
                         ),
@@ -99,7 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child:  FormTextField(text: "Selectionner le type de sang",)
+                              child:  CustomTextField(hintText: "Selectionner le type de sang",)
                           ),
                         ],
                       ),
@@ -118,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     borderRadius: BorderRadius.circular(30.0)
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child:  FormTextField(text: "Entrez le poids du patient",)
+                                child:  CustomTextField(hintText: "Entrez le poids du patient",)
                             ),
                           ],
                         ),

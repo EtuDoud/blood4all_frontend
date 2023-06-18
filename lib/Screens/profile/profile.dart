@@ -1,8 +1,10 @@
-import 'package:blood4all/Screens/profile/widgets/send_file_modal.dart';import 'package:blood4all/Screens/utils/constants.dart';
+import 'package:blood4all/Screens/profile/widgets/send_file_modal.dart';
+import 'package:blood4all/Screens/utils/constants.dart';
 import 'package:blood4all/Screens/utils/urls.dart';
-import 'package:blood4all/Widgets/Widgets/item_account.dart';
-import 'package:blood4all/Widgets/Widgets/profile_widget.dart';
-import 'package:blood4all/Widgets/Widgets/text_custom.dart';
+
+import 'package:blood4all/Widgets/item_account.dart';
+import 'package:blood4all/Widgets/profile_widget.dart';
+import 'package:blood4all/Widgets/text_custom.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -13,7 +15,6 @@ class UserProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profil"),
-       
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -29,7 +30,7 @@ class UserProfileScreen extends StatelessWidget {
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(25.0)),
                     ),
-                    backgroundColor:  kBackgroundColor,
+                    backgroundColor: kBackgroundColor,
                     context: context,
                     isScrollControlled: true,
                     builder: (context) {

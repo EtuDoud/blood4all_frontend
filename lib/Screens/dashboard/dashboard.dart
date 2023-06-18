@@ -1,9 +1,10 @@
 import 'package:blood4all/Screens/profile/profile.dart';
 import 'package:blood4all/Screens/utils/urls.dart';
-import 'package:blood4all/Widgets/Widgets/item_account.dart';
-import 'package:blood4all/Widgets/Widgets/remote_image.dart';
-import 'package:blood4all/Widgets/Widgets/stat_card.dart';
-import 'package:blood4all/Widgets/Widgets/text_custom.dart';
+import 'package:blood4all/Widgets/item_account.dart';
+import 'package:blood4all/Widgets/remote_image.dart';
+import 'package:blood4all/Widgets/stat_card.dart';
+import 'package:blood4all/Widgets/text_custom.dart';
+
 import 'package:flutter/material.dart';
 
 class BankBloodDashboardScreen extends StatelessWidget {
