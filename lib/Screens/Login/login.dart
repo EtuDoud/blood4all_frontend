@@ -1,10 +1,10 @@
 import 'package:blood4all/Screens/resultScreen/widgets/fields/password_field.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
-
+import 'package:blood4all/Screens/sign/signUp.dart';
 import 'package:blood4all/Screens/utils/constants.dart';
 import 'package:blood4all/Screens/utils/validators.dart';
 import 'package:blood4all/Widgets/button.dart';
-
+import 'package:transition/transition.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Column(
                   children: [
-                    Image.asset("assets/images/logo.png"),
+                     Image.asset("assets/images/logo.png"),
                     const Text(
                       "Connexion",
                       style: TextStyle(
@@ -54,11 +54,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 24,
                       ),
                     ),
+                   
                   ],
                 ),
+
+
                 SizedBox(
                   height: 60,
                 ),
+               
                 CustomTextField(
                   hintText: 'Email',
                   inputType: TextInputType.emailAddress,
@@ -124,6 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 50,
                 ),
+               
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -140,7 +145,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                              context,
+                              Transition(
+                                child: const SignUpScreen(),
+                                transitionEffect:
+                                  TransitionEffect.LEFT_TO_RIGHT,
+                              ),
+                            );
+
+
+                      },
                     ),
                   ],
                 ),
