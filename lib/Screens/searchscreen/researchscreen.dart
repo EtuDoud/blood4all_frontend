@@ -1,46 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:blood4all/core/controllers/blood_controller.dart';
+import 'package:blood4all/core/service/parse_result.dart';
+import 'package:blood4all/core/utils/app_func.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import '../resultScreen/result.dart';
-
-class ApiService {
-  static Future<bool> sendData(BuildContext context, int? unite,
-      String bloodgroup, String productType) async {
-    try {
-      print(unite);
-      print(bloodgroup);
-      print(productType);
-      final response = await http.post(
-        Uri.parse(
-            'https://blood4all-backend.vercel.app/api/doctor/clj6xupzd0000mk08cbi8hnou'),
-        // Remplacez par votre URL d'API
-        body: {
-          'nombrePoches': unite,
-          'groupeSanguin': bloodgroup,
-          'productType': productType
-        },
-        headers: {'Content-Type': 'application/json'},
-      );
-      print(response);
-      if (response.statusCode == 200) {
-        bool apiResponse = response.body.toLowerCase() == 'true';
-        if (apiResponse) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ResultScreen()),
-          );
-        } else {
-          // Handle other API response cases
-        }
-        return apiResponse;
-      } else {
-        return false; // Échec
-      }
-    } catch (e) {
-      return false; // Erreur
-    }
-  }
-}
 
 class MyFormPage extends StatefulWidget {
   const MyFormPage({super.key});
@@ -58,23 +21,35 @@ class _MyFormPageState extends State<MyFormPage> {
   //implementer la selection d'un groupe sanguin
   List<String> bloodGroups = ['A+', 'A-', 'B+', 'B-', '0+', 'O-', 'AB+', 'AB-'];
   String? selectedBloodGroup;
+  bool isLoading = false;
 
   Future<void> _submitForm() async {
     int unite = int.tryParse(_uniteController.text) ?? 0;
     String type = _typeController.text;
     int? volume = _selectedVolume;
     String selectedBloodGroup = "O+";
-
-    bool success =
-        await ApiService.sendData(context, unite, selectedBloodGroup, type);
-
+    bool success = false;
+    setState(() {
+      isLoading = true;
+    });
+    FetchData fetchData =
+        await BloodController().searchBlood(unite, selectedBloodGroup, type);
+    if (fetchData.error == "") {
+      success = true;
+    }
+    setState(() {
+      isLoading = false;
+    });
+    if (success) {
+      logd(fetchData.data);
+    }
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(success ? 'Succès' : 'Erreur'),
           content: Text(success
-              ? 'Les données ont été envoyées avec succès.'
+              ? 'Les données ont été envoyées avec succès.\n ${fetchData.data.toString()}'
               : 'Une erreur s\'est produite lors de l\'envoi des données.'),
           actions: <Widget>[
             TextButton(
@@ -249,7 +224,9 @@ class _MyFormPageState extends State<MyFormPage> {
                   padding: const EdgeInsets.only(bottom: 40, top: 20),
                   child: ElevatedButton(
                     onPressed: _submitForm,
-                    child: const Text('Envoyer'),
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('Envoyer'),
                   ),
                 ),
               ],
@@ -260,7 +237,3 @@ class _MyFormPageState extends State<MyFormPage> {
     );
   }
 }
-
-//Dans cet exemple, la classe ApiService encapsule la logique d'envoi des données à votre point d'extrémité API. La méthode statique sendData effectue la requête HTTP POST et renvoie un booléen indiquant si l'opération a réussi ou non.
-
-//La classe MyFormPage contient maintenant uniquement la logique d'interface utilisateur. Lorsque le bouton "Envoyer" est cliqué, il appelle la méthode sendData de ApiService pour envoyer les données et affiche un dialogue contextuel en fonction du résultat.
