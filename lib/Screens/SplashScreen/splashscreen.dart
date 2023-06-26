@@ -30,13 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Image(image: AssetImage("assets/images/OnboardLogo.png"),
             ),
             SizedBox(
               height: 8,
             ),
-            const SpinKitThreeBounce(
+            SpinKitThreeBounce(
               color: Colors.red,
               size: 30.0,
           ),

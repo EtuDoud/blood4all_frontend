@@ -2,15 +2,27 @@
 import 'package:flutter/material.dart';
 
 import '../../Widgets/send_file_modal.dart';
+import '../utils/qr_code.dart';
 
 class QrcodeScreen extends StatefulWidget {
-  const QrcodeScreen({Key? key}) : super(key: key);
+  const QrcodeScreen({Key? key, required this.data}) : super(key: key);
+
+  final List<String> data;
 
   @override
   State<QrcodeScreen> createState() => _QrcodeScreenState();
 }
 
 class _QrcodeScreenState extends State<QrcodeScreen> {
+
+  late List<String> _receivedData;
+
+  @override
+  void initState() {
+    super.initState();
+    _receivedData = widget.data;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,32 +37,8 @@ class _QrcodeScreenState extends State<QrcodeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("QR code", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 30),),
-                  Center(child: Padding(padding: EdgeInsets.only(top: 10, bottom: 95),child: Text("Presentez ce code a \n un Agent", textAlign: TextAlign.center,))),
-                  Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.greenAccent,),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 40, bottom: 40),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xffEF4923),
-                            padding: const EdgeInsets.only(
-                                top: 16, bottom: 16, left: 30, right: 30),
-                            fixedSize: const Size(220, 55),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50))),
-                        onPressed: () {  },
-                        child: const Text(
-                          "Imprimer",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        )
-                    ),
-                  ),
+                  Center(child: Padding(padding: EdgeInsets.only(top: 10, bottom: 60),child: Text("Presentez ce code a \n un Agent", textAlign: TextAlign.center,))),
+                  MultiDataQRCode(data: _receivedData),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -65,8 +53,9 @@ class _QrcodeScreenState extends State<QrcodeScreen> {
                           },);
                         },
                         child: Container(
-                          height: 60,
-                          width: 60,
+                          child: Image.asset("assets/images/share.png"),
+                          height: 64,
+                          width: 64,
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color(0xff153565)),
                         ),
                       ),

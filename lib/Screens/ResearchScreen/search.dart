@@ -1,4 +1,6 @@
-import 'package:blood4all/Screens/Login/Widgets/textField.dart';
+
+import 'package:blood4all/Screens/resultScreen/widgets/fields/search_bar.dart';
+import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
 import 'package:flutter/material.dart';
 
 import '../../Models/blood_info.dart';
@@ -12,6 +14,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   //creer les variables
+  int elementActifIndex = -1;
   bool active = false;
   List<String> groupe = ['A+', 'B+', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -29,14 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Icon"),
-                      SizedBox(width: 40,),
-                      Text("Formulaire de recherche", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16), textAlign: TextAlign.center, )
-                    ],
-                  ),
+                  Center(child: Text("Formulaire de recherche", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16), textAlign: TextAlign.center, )),
                   Padding( padding:EdgeInsets.only(top: 60, bottom: 15) ,
                       child: Text("Recherchez avec BLOOD4ALL", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20), textAlign: TextAlign.center,)),
                   Text("Veuillez fournir les informations \n demandees ci-dessous", style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.normal), textAlign: TextAlign.center,)
@@ -62,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child:  FormTextField(text: "Volum",)
+                              child:  SearchBar( searchText: 'Volum',)
                           ),
                         ],
                       ),
@@ -81,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     borderRadius: BorderRadius.circular(30.0)
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child:  FormTextField(text: "Email",)
+                                child: CustomTextField(hintText: "Email",)
                             ),
                           ],
                         ),
@@ -99,7 +95,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child:  FormTextField(text: "Selectionner le type de sang",)
+                              child:  CustomTextField(hintText: "Selectionner le type de sang",)
                           ),
                         ],
                       ),
@@ -118,7 +114,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     borderRadius: BorderRadius.circular(30.0)
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child:  FormTextField(text: "Entrez le poids du patient",)
+                                child:  CustomTextField(hintText: "Entrez le poids du patient",)
                             ),
                           ],
                         ),
@@ -136,7 +132,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
                                 ),
-                                itemBuilder: (context, index) {
+                                itemBuilder: (context, int index) {
                                 return GestureDetector(
                                   onTap: () {
                                     setState(() {

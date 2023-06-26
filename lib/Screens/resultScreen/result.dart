@@ -1,6 +1,5 @@
 import 'package:blood4all/Screens/resultScreen/widgets/homeBody.dart';
 
-import 'package:blood4all/Widgets/text_custom.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -15,13 +14,12 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color(0xff153565)
+
       ),
       body: HomeBody(),
     );
 
-    /* 
+    /*
     Scaffold(
       body: SingleChildScrollView(
         child: Container(

@@ -23,8 +23,8 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Container(
-    
-      margin: const EdgeInsets.only(bottom: 20 * 2.5),
+  
+      margin: const EdgeInsets.only(bottom: 20),
       height: widget.size.height * 0.4,
       child: Stack(children: [
         Container(

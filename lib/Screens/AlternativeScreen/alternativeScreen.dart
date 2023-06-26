@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../ResearchScreen/search.dart';
+
 class AlternativeScreen extends StatefulWidget {
   const AlternativeScreen({Key? key}) : super(key: key);
 
@@ -22,14 +24,7 @@ class _AlternativeScreenState extends State<AlternativeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Icon"),
-                    SizedBox(width: 40,),
-                    Text("Choisissez une Alternative", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16), textAlign: TextAlign.center, )
-                  ],
-                ),
+                Text("Choisissez une Alternative", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16), textAlign: TextAlign.center, ),
                 Padding( padding:EdgeInsets.only(top: 60, bottom: 15) ,
                     child: Text("Recherchez avec BLOOD4ALL", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20), textAlign: TextAlign.center,)),
                 Text("Veuillez choisir un des groupes\n sanguins ci-dessous", style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.normal), textAlign: TextAlign.center,)
@@ -38,7 +33,7 @@ class _AlternativeScreenState extends State<AlternativeScreen> {
           ),
           Center(
             child: Padding(
-              padding: EdgeInsets.only(top:110 , left: 26, right: 26),
+              padding: EdgeInsets.only(top:90 , left: 26, right: 26),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +43,7 @@ class _AlternativeScreenState extends State<AlternativeScreen> {
                     textAlign: TextAlign.center,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(top: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -74,7 +69,7 @@ class _AlternativeScreenState extends State<AlternativeScreen> {
                       ],
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(top: 80, bottom: 60),
+                  Padding(padding: EdgeInsets.only(top: 40, bottom: 10),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffEF4923),
@@ -83,7 +78,9 @@ class _AlternativeScreenState extends State<AlternativeScreen> {
                             fixedSize: const Size(279, 56),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50))),
-                        onPressed: () {  },
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),));
+                        },
                         child: const Text(
                           "Recherchez",
                           textAlign: TextAlign.center,

@@ -31,10 +31,10 @@ class SendFileModal extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: ListTile(
                   leading: Container(
+                    child: Image.asset("assets/images/whatsapp", width: 25,),
                     height: 50,
                     width: 50,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Color(0xff153565)),
-                    child: Icon(Icons.add_a_photo_outlined, color: Colors.red, size: 25,),
                   ),
                   title: Text("xender", style: TextStyle(color: Colors.white, fontSize: 16),),
                 ),
