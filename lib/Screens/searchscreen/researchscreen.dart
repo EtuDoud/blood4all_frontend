@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import '../resultScreen/result.dart';
 
-
 class ApiService {
-  static Future<bool> sendData( BuildContext context   ,int? unite, String bloodgroup, String productType) async {
+  static Future<bool> sendData(BuildContext context, int? unite,
+      String bloodgroup, String productType) async {
     try {
+      print(unite);
+      print(bloodgroup);
+      print(productType);
       final response = await http.post(
-        Uri.parse('https://blood4all-backend.vercel.app/api/doctor/clj6xupzd0000mk08cbi8hnou'),
+        Uri.parse(
+            'https://blood4all-backend.vercel.app/api/doctor/clj6xupzd0000mk08cbi8hnou'),
         // Remplacez par votre URL d'API
-        body: jsonEncode({ 'nombrePoches': unite, 'groupeSanguin': bloodgroup, 'productType': productType }),
+        body: {
+          'nombrePoches': unite,
+          'groupeSanguin': bloodgroup,
+          'productType': productType
+        },
         headers: {'Content-Type': 'application/json'},
       );
-
+      print(response);
       if (response.statusCode == 200) {
         bool apiResponse = response.body.toLowerCase() == 'true';
         if (apiResponse) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ResultScreen()),
+            MaterialPageRoute(builder: (context) => const ResultScreen()),
           );
         } else {
           // Handle other API response cases
@@ -35,8 +42,9 @@ class ApiService {
   }
 }
 
-
 class MyFormPage extends StatefulWidget {
+  const MyFormPage({super.key});
+
   @override
   _MyFormPageState createState() => _MyFormPageState();
 }
@@ -57,7 +65,8 @@ class _MyFormPageState extends State<MyFormPage> {
     int? volume = _selectedVolume;
     String selectedBloodGroup = "O+";
 
-    bool success = await ApiService.sendData( context, unite, selectedBloodGroup, type);
+    bool success =
+        await ApiService.sendData(context, unite, selectedBloodGroup, type);
 
     showDialog(
       context: context,
@@ -86,13 +95,13 @@ class _MyFormPageState extends State<MyFormPage> {
       body: SingleChildScrollView(
         child: Column(children: [
           Container(
-            padding: EdgeInsets.only(top: 60),
+            padding: const EdgeInsets.only(top: 60),
             width: MediaQuery.of(context).size.width,
             height: 250,
-            color: Color(0xff153565),
+            color: const Color(0xff153565),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: const [
                 Center(
                     child: Text(
                   "Formulaire de recherche",
@@ -128,8 +137,8 @@ class _MyFormPageState extends State<MyFormPage> {
             child: Column(
               children: <Widget>[
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text("volume (ml)"),
-                  SizedBox(
+                  const Text("volume (ml)"),
+                  const SizedBox(
                     height: 10,
                   ),
                   DropdownButtonFormField<int>(
@@ -147,12 +156,12 @@ class _MyFormPageState extends State<MyFormPage> {
                     },
                   ),
                 ]),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text("Nombre d'unite"),
-                  SizedBox(
+                  const Text("Nombre d'unite"),
+                  const SizedBox(
                     height: 10,
                   ),
                   TextField(
@@ -173,12 +182,12 @@ class _MyFormPageState extends State<MyFormPage> {
                 //     keyboardType: TextInputType.number,
                 //   ),
                 // ]),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text("Type de produit"),
-                  SizedBox(
+                  const Text("Type de produit"),
+                  const SizedBox(
                     height: 10,
                   ),
                   TextField(
@@ -186,18 +195,19 @@ class _MyFormPageState extends State<MyFormPage> {
                     keyboardType: TextInputType.text,
                   ),
                 ]),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text("Groupe sanguin"),
-                  SizedBox(
+                  const Text("Groupe sanguin"),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Container(
+                  SizedBox(
                     height: 150,
                     child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 5,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -218,13 +228,13 @@ class _MyFormPageState extends State<MyFormPage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: selectedBloodGroup == bloodGroup
-                                      ? Color(0xffDD989E)
-                                      : Color(0xffE9EEF6),
+                                      ? const Color(0xffDD989E)
+                                      : const Color(0xffE9EEF6),
                                 ),
                                 child: Center(
                                   child: Text(
                                     bloodGroup,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16, color: Colors.black),
                                   ),
                                 ),
@@ -236,7 +246,7 @@ class _MyFormPageState extends State<MyFormPage> {
                 ]),
                 const SizedBox(height: 16.0),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 40, top: 20),
+                  padding: const EdgeInsets.only(bottom: 40, top: 20),
                   child: ElevatedButton(
                     onPressed: _submitForm,
                     child: const Text('Envoyer'),

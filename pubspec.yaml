@@ -33,6 +33,7 @@ dependencies:
   http:
   qr_flutter: ^4.0.0
   logger:
+  dio:
 
 
   # The following adds the Cupertino Icons font to your application.
