@@ -1,11 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:blood4all/Screens/Login/login.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/password_field.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
+import 'package:blood4all/Screens/searchscreen/researchscreen.dart';
 import 'package:blood4all/Screens/utils/validators.dart';
 import 'package:blood4all/Widgets/button.dart';
+import 'package:blood4all/core/controllers/login_controller.dart';
+import 'package:blood4all/core/service/parse_result.dart';
+import 'package:blood4all/core/utils/app_func.dart';
 import 'package:flutter/material.dart';
-
 
 class UserSignUp extends StatefulWidget {
   const UserSignUp({
@@ -17,29 +21,30 @@ class UserSignUp extends StatefulWidget {
 }
 
 class _UserSignUpState extends State<UserSignUp> {
- late String email;
+  late String email;
   late String name;
   late String telephone; // ajouter la validation du numero de telephone
   late String matricule;
-late String password;
+  late String addresse;
+  late String password;
   bool isPasswordVisible = true;
 
   bool isLogging = false;
   late LabeledGlobalKey<FormState> key;
   bool shouldValidate = false;
-   @override
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    key = LabeledGlobalKey<FormState> ("SIGNUP");
+    key = LabeledGlobalKey<FormState>("SIGNUP");
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Form(
           key: key,
           child: SingleChildScrollView(
@@ -59,10 +64,27 @@ late String password;
                     if (p0 == null) {
                       return "Champ requis";
                     }
-                    return "correct";
+                    return null;
                   },
                   onSaved: (p0) {
                     name = p0!;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                //Adresse
+                CustomTextField(
+                  hintText: "Adresse",
+                  inputType: TextInputType.text,
+                  validator: (p0) {
+                    if (p0 == null) {
+                      return "Champ requis";
+                    }
+                    return null;
+                  },
+                  onSaved: (p0) {
+                    addresse = p0!;
                   },
                 ),
                 const SizedBox(
@@ -75,7 +97,7 @@ late String password;
                     if (p0 == null) {
                       return "Champ requis";
                     }
-                    return "correct";
+                    return null;
                   },
                   onSaved: (p0) {
                     telephone = p0!;
@@ -91,7 +113,7 @@ late String password;
                     if (p0 == null) {
                       return "Champ requis";
                     }
-                    return "correct";
+                    return null;
                   },
                   onSaved: (p0) {
                     email = p0!;
@@ -117,26 +139,75 @@ late String password;
                     password = value!;
                   },
                 ),
-              
                 const SizedBox(
                   height: 48,
                 ),
-
                 CustomButton(
-                          onTap: () {
-                              setState(() {
-                                shouldValidate = true;
-                              });
-                              if (key.currentState!.validate()) {
-                                key.currentState!.save();
-                                setState(() {
-                                  isLogging = true;
-                                });
-                                   }
-                          },
-                          text: "Envoyer",
-                        ),
-  
+                  onTap: () async {
+                    setState(() {
+                      shouldValidate = true;
+                    });
+                    if (key.currentState!.validate()) {
+                      key.currentState!.save();
+                      setState(() {
+                        isLogging = true;
+                      });
+                      Map<String, dynamic> data = {
+                        "name": name,
+                        "email": email,
+                        "addresse": addresse,
+                        "telephone": telephone,
+                        "password": password
+                      };
+
+                      FetchData f = await LoginController().login(
+                          "https://blood4all-backend.vercel.app/api/auth/user/signup",
+                          data);
+
+                      if (f.error == "") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Création de compte avec succès !",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                        navigateToNextPage(context, const MyFormPage());
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Erreur de création de compte",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      //
+                      setState(() {
+                        isLogging = false;
+                      });
+                    }
+                  },
+                  child: Center(
+                    child: isLogging
+                        ? const CircularProgressIndicator()
+                        : const Text(
+                            "Envoyer",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                  ),
+                ),
+
                 /*
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -155,18 +226,19 @@ late String password;
                         fontSize: 16,
                       ),
                     )),
-                */SizedBox(
+                */
+                const SizedBox(
                   height: 10,
                 ),
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
+                      builder: (context) => const LoginScreen(),
                     ));
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'Vous aviez un compte',
                         style: TextStyle(

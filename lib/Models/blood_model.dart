@@ -11,7 +11,7 @@ class BloodModel {
   final bool isAvailable;
   BloodModel(
       {required this.id,
-      this.isAvailable=false,
+      this.isAvailable = false,
       required this.bloodGroup,
       required this.bloodBank,
       required this.delayTime});
@@ -21,16 +21,13 @@ class BloodModel {
       String? bloodGroup,
       BloodBank? bloodBank,
       String? delayTime,
-      bool? isAvailable
-      }) {
+      bool? isAvailable}) {
     return BloodModel(
         id: id ?? this.id,
         bloodGroup: bloodGroup ?? this.bloodGroup,
         bloodBank: bloodBank ?? this.bloodBank,
         delayTime: delayTime ?? this.delayTime,
-        
-        isAvailable: isAvailable?? this.isAvailable
-        );
+        isAvailable: isAvailable ?? this.isAvailable);
   }
 
   Map<String, dynamic> toMap() {
@@ -39,7 +36,7 @@ class BloodModel {
       'bloodGroup': bloodGroup,
       'bloodBank': bloodBank.toMap(),
       'delayTime': delayTime,
-      'isAvailable':isAvailable
+      'isAvailable': isAvailable
     };
   }
 
@@ -49,10 +46,7 @@ class BloodModel {
         bloodGroup: map['bloodGroup'] as String,
         bloodBank: BloodBank.fromMap(map['bloodBank'] as Map<String, dynamic>),
         delayTime: map['delayTime'] as String,
-        
-        isAvailable: map['isAvailable'] as bool
-        
-        );
+        isAvailable: map['isAvailable'] as bool);
   }
 
   String toJson() => json.encode(toMap());
@@ -85,8 +79,7 @@ class BloodModel {
             name: "Cotonou Blood Express",
             adresse: "250 rue de l'amzon"),
         delayTime: '50',
-        isAvailable: true
-        ),
+        isAvailable: true),
     BloodModel(
         id: "2",
         bloodGroup: "AB+",
@@ -100,11 +93,8 @@ class BloodModel {
         bloodBank: BloodBank(
             id: "2",
             name: "Cotonou Blood Express",
-            
             adresse: "250 rue de l'amzon"),
-            isAvailable: false
-            
-            ),
+        isAvailable: false),
     BloodModel(
         delayTime: "50",
         id: "4",

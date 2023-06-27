@@ -58,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child:  SearchBar( searchText: 'Volum',)
+                             // child:  SearchBar( searchText: 'Volum',)
                           ),
                         ],
                       ),

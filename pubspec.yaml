@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   http:
-  qr_flutter: ^4.0.0
+  qr_flutter: ^4.1.0
   logger:
   dio:
 

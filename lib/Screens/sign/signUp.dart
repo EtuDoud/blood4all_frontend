@@ -24,7 +24,7 @@ class SignUpScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [UserSignUp(), DoctorSignUp(), BloodBankSignUp()],
         ),
       ),

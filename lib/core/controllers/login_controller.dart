@@ -3,24 +3,15 @@ import 'package:blood4all/core/service/parse_result.dart';
 import 'package:blood4all/core/utils/app_func.dart';
 import 'package:dio/dio.dart';
 
-class BloodController {
+class LoginController {
   DioClient dioClient = DioClient();
 
-  Future<FetchData> searchBlood(
-      int? unite, String bloodgroup, String productType) async {
+  Future<FetchData> login(String url, Map<String, dynamic> data) async {
     FetchData fetchData = FetchData(error: "", data: []);
     try {
-      logd(unite);
-      logd(bloodgroup);
-      logd(productType);
-
       final response = await dioClient.post(
-        'https://blood4all-backend.vercel.app/api/doctor/clj6xupzd0000mk08cbi8hnou',
-        data: {
-          'nombrePoches': unite,
-          'groupeSanguin': bloodgroup,
-          'productType': productType
-        },
+        url,
+        data: data,
       );
       logd(response);
       if (response.statusCode == 200) {
@@ -39,6 +30,4 @@ class BloodController {
 
     return fetchData;
   }
-
-  
 }

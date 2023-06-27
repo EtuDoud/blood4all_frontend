@@ -1,21 +1,7 @@
-
-
-
-
-import 'package:blood4all/Screens/Login/login.dart';
 import 'package:blood4all/Screens/sign/signUp.dart';
 import 'package:flutter/material.dart';
 
-import 'Screens/AlternativeScreen/alternativeScreen.dart';
-import 'Screens/ResearchScreen/search.dart';
-import 'Screens/SplashScreen/splashscreen.dart';
-import 'Screens/qrcode_screen/qrcode_screen.dart';
-import 'Screens/reserve_screen/reservescreen.dart';
-import 'Screens/resultScreen/result.dart';
-import 'Screens/searchscreen/researchscreen.dart';
 import 'Screens/utils/constants.dart';
-
-
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-       theme: ThemeData(
+    return MaterialApp(
+        theme: ThemeData(
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
             backgroundColor: kPrimaryColor,
           ),
@@ -49,7 +35,7 @@ class MyApp extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               elevation: 0,
-              backgroundColor:  const Color(0xffEF4923),
+              backgroundColor: const Color(0xffEF4923),
               shape: const StadiumBorder(),
               maximumSize: const Size(double.infinity, 56),
               minimumSize: const Size(double.infinity, 56),
@@ -87,20 +73,7 @@ class MyApp extends StatelessWidget {
             hintStyle: TextStyle(color: Color(0XFF9E9E9E)),
           ),
         ),
-      
-
         debugShowCheckedModeBanner: false,
-        home: MyFormPage());
+        home: const SignUpScreen());
   }
 }
-
-// Widget Bouton() {
-//   return const ElevatedButton(
-//       onPressed: null,
-//       child: Text(
-//         "Suivant",
-//         textAlign: TextAlign.center,
-//         style: TextStyle(
-//             fontWeight: FontWeight.w600, fontSize: 16, color: Colors.white),
-//       ));
-// }

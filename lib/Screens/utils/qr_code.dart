@@ -4,19 +4,19 @@ import 'package:qr_flutter/qr_flutter.dart';
 class MultiDataQRCode extends StatelessWidget {
   final List<String> data; // Liste des données à inclure dans le QR code
 
-  MultiDataQRCode({required this.data});
+  const MultiDataQRCode({super.key, required this.data});
 
   void _showQRData(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Données du QR Code'),
+          title: const Text('Données du QR Code'),
           content: Text("$data"),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Fermer'),
+              child: const Text('Fermer'),
             ),
           ],
         );
@@ -26,25 +26,25 @@ class MultiDataQRCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String combinedData = data.join('\n'); // Combinez les données en les séparant par une nouvelle ligne
+    String combinedData = data.join(
+        '\n'); // Combinez les données en les séparant par une nouvelle ligne
 
     return Center(
-      child: Column(
-        children: [
-          QrImage(
-            data: combinedData,
-            version: QrVersions.auto,
-            size: 200.0,
+        child: Column(
+      children: [
+        QrImageView(
+          data: combinedData,
+          version: QrVersions.auto,
+          size: 200.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 30, bottom: 20),
+          child: ElevatedButton(
+            onPressed: () => _showQRData(context),
+            child: const Text('Afficher les données'),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 30, bottom: 20),
-            child: ElevatedButton(
-              onPressed: () => _showQRData(context),
-              child: Text('Afficher les données'),
-            ),
-          ),
-        ],
-      )
-    );
+        ),
+      ],
+    ));
   }
 }
