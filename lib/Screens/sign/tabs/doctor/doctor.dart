@@ -26,7 +26,7 @@ class _DoctorSignUpState extends State<DoctorSignUp> {
   late String password;
   late String hospital;
   late String numOrdreNational;
-  late String addresse;
+  late String lastname;
   bool isPasswordVisible = true;
 
   bool isLogging = false;
@@ -59,7 +59,23 @@ class _DoctorSignUpState extends State<DoctorSignUp> {
                   height: 60,
                 ),
                 CustomTextField(
-                  hintText: "Nom et Prenom",
+                  hintText: "Nom",
+                  inputType: TextInputType.text,
+                  validator: (p0) {
+                    if (p0 == null) {
+                      return "Champ requis";
+                    }
+                    return null;
+                  },
+                  onSaved: (p0) {
+                    lastname = p0!;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                CustomTextField(
+                  hintText: "Prénoms",
                   inputType: TextInputType.text,
                   validator: (p0) {
                     if (p0 == null) {
@@ -85,23 +101,6 @@ class _DoctorSignUpState extends State<DoctorSignUp> {
                   },
                   onSaved: (p0) {
                     hospital = p0!;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                //addresse
-                CustomTextField(
-                  hintText: "Adresse",
-                  inputType: TextInputType.text,
-                  validator: (p0) {
-                    if (p0 == null) {
-                      return "Champ requis";
-                    }
-                    return null;
-                  },
-                  onSaved: (p0) {
-                    addresse = p0!;
                   },
                 ),
                 const SizedBox(
@@ -186,14 +185,25 @@ class _DoctorSignUpState extends State<DoctorSignUp> {
                         isLogging = true;
                       });
                       Map<String, dynamic> data = {
-                        "name": name,
+                        "firstname": name,
+                        "lastname": lastname,
                         "email": email,
-                        "addresse": addresse,
                         "telephone": telephone,
                         "password": password,
-                        "numOrdreNational": "NUM/0000/ONMB/DEP/AAAA",
+                        "numOrdreNational": numOrdreNational,
                         "hopital": hospital,
                       };
+                      /*
+                        {
+                          "firstname": "Ayinde",
+                          "lastname": "Olagoke",
+                          "email": "adeyemi@gmail.com",
+                          "telephone": "0022996173296",
+                          "password": "password",
+                          "numOrdreNational": "NUM/0000/ONMB/DEP/AAAA",
+                          "hopital": "CNHU"
+                        }
+                      */
 
                       FetchData f = await LoginController().login(
                           "https://blood4all-backend.vercel.app/api/auth/doctor/signup",

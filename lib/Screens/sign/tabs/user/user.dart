@@ -58,7 +58,7 @@ class _UserSignUpState extends State<UserSignUp> {
                   height: 60,
                 ),
                 CustomTextField(
-                  hintText: "Nom et Prenom",
+                  hintText: "Nom",
                   inputType: TextInputType.text,
                   validator: (p0) {
                     if (p0 == null) {
@@ -75,7 +75,7 @@ class _UserSignUpState extends State<UserSignUp> {
                 ),
                 //Adresse
                 CustomTextField(
-                  hintText: "Adresse",
+                  hintText: "Prénoms",
                   inputType: TextInputType.text,
                   validator: (p0) {
                     if (p0 == null) {
@@ -153,10 +153,10 @@ class _UserSignUpState extends State<UserSignUp> {
                         isLogging = true;
                       });
                       Map<String, dynamic> data = {
-                        "name": name,
+                        "firstName": name,
+                        "lastName": addresse,
                         "email": email,
-                        "addresse": addresse,
-                        "telephone": telephone,
+                        "phoneNumber": telephone,
                         "password": password
                       };
 
