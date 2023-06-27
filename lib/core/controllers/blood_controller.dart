@@ -8,7 +8,7 @@ class BloodController {
 
   Future<FetchData> searchBlood(
       int? unite, String bloodgroup, String productType) async {
-    FetchData fetchData = FetchData(error: "", data: null);
+    FetchData fetchData = FetchData(error: "", data: []);
     try {
       logd(unite);
       logd(bloodgroup);

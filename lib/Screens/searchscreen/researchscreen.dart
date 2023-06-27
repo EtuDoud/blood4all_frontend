@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:blood4all/Screens/resultScreen/result.dart';
 import 'package:blood4all/core/controllers/blood_controller.dart';
 import 'package:blood4all/core/service/parse_result.dart';
 import 'package:blood4all/core/utils/app_func.dart';
@@ -32,6 +33,7 @@ class _MyFormPageState extends State<MyFormPage> {
     setState(() {
       isLoading = true;
     });
+    List data = [];
     FetchData fetchData =
         await BloodController().searchBlood(unite, selectedBloodGroup, type);
     if (fetchData.error == "") {
@@ -42,6 +44,7 @@ class _MyFormPageState extends State<MyFormPage> {
     });
     if (success) {
       logd(fetchData.data);
+      data = fetchData.data;
     }
     showDialog(
       context: context,
@@ -49,12 +52,16 @@ class _MyFormPageState extends State<MyFormPage> {
         return AlertDialog(
           title: Text(success ? 'Succès' : 'Erreur'),
           content: Text(success
-              ? 'Les données ont été envoyées avec succès.\n ${fetchData.data.toString()}'
+              ? 'Les données ont été envoyées avec succès.\n ${data.isEmpty ? '\nPas de banque de sang correspondant à votre recherche' : 'Cliquez OK pour voir les résultats'}'
               : 'Une erreur s\'est produite lors de l\'envoi des données.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                if (success && data.isNotEmpty) {
+                  navigateToNextPage(context, ResultScreen(data));
+                } else {
+                  Navigator.of(context).pop();
+                }
               },
               child: const Text('OK'),
             ),
