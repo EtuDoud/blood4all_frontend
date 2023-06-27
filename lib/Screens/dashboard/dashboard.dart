@@ -13,8 +13,8 @@ class BankBloodDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: const Text("Dashboard"),
         actions: [
           IconButton(
@@ -27,7 +27,7 @@ class BankBloodDashboardScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UserProfileScreen(),
+                    builder: (context) => const UserProfileScreen(),
                   ));
             },
           ),
@@ -48,7 +48,7 @@ class BankBloodDashboardScreen extends StatelessWidget {
                     children: [
                       StatCardGrid(
                         height: 190,
-                        color: Color(0xff153565),
+                        color: const Color(0xff153565),
                         value: "129500",
                         desc: 'Stock de Sang',
                         icon: Icons.query_stats,
@@ -72,7 +72,7 @@ class BankBloodDashboardScreen extends StatelessWidget {
                     children: [
                       StatCardGrid(
                         height: 120,
-                        color: Color.fromARGB(255, 102, 20, 14),
+                        color: const Color.fromARGB(255, 102, 20, 14),
                         value: "95",
                         desc: 'Campagne de Sang',
                         icon: Icons.forum_outlined,
@@ -81,7 +81,7 @@ class BankBloodDashboardScreen extends StatelessWidget {
                       const SizedBox(height: 10.0),
                       StatCardGrid(
                         height: 190,
-                        color: Color.fromARGB(255, 185, 22, 22),
+                        color: const Color.fromARGB(255, 185, 22, 22),
                         value: "200",
                         desc: 'Don de Sang mensuelles',
                         icon: Icons.apartment_outlined,

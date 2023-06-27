@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:blood4all/Screens/utils/constants.dart';
 import 'package:flutter/material.dart';
-
-
 /// SearchBar is the widget of the search bar
 class SearchBar extends StatefulWidget {
   const SearchBar(

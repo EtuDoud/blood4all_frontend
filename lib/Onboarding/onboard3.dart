@@ -84,6 +84,5 @@ class Onboarding3State extends State<Onboarding3> {
         ),
       )),
     );
-    ;
   }
 }
