@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:blood4all/Screens/blood_bank/blood_bank.dart';
+import 'package:blood4all/Screens/dashboard/dashboard.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/password_field.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
+import 'package:blood4all/Screens/searchscreen/researchscreen.dart';
 import 'package:blood4all/Screens/sign/signUp.dart';
 import 'package:blood4all/Screens/utils/constants.dart';
 import 'package:blood4all/Screens/utils/validators.dart';
@@ -176,7 +178,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         );
-                        navigateToNextPage(context, const BloodBankPage());
+                        navigateToNextPage(
+                            context,
+                            _selectedVolume == "Banque de sang"
+                                ? const BankBloodDashboardScreen()
+                                : _selectedVolume == "Médécin"
+                                    ? const MyFormPage()
+                                    : const BloodBankPage(),
+                            back: false);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
