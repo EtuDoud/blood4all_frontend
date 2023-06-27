@@ -1,9 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:blood4all/Screens/blood_bank/blood_bank.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/password_field.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
 import 'package:blood4all/Screens/sign/signUp.dart';
 import 'package:blood4all/Screens/utils/constants.dart';
 import 'package:blood4all/Screens/utils/validators.dart';
 import 'package:blood4all/Widgets/button.dart';
+import 'package:blood4all/core/controllers/login_controller.dart';
+import 'package:blood4all/core/service/parse_result.dart';
+import 'package:blood4all/core/utils/app_func.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,10 +22,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     key = LabeledGlobalKey<FormState>("LOGIN");
   }
+
+  String? _selectedVolume;
+  final List<String> _volumes = ["Banque de sang", "Médécin", "Patient"];
 
   bool isPasswordVisible = true;
   bool isLogging = false;
@@ -44,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Column(
                   children: [
-                     Image.asset("assets/images/logo.png"),
+                    Image.asset("assets/images/logo.png"),
                     const Text(
                       "Connexion",
                       style: TextStyle(
@@ -53,15 +61,35 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 24,
                       ),
                     ),
-                   
                   ],
                 ),
-
-
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
-               
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 5.0),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: _selectedVolume ?? _volumes[0],
+                    items: _volumes.map((String volume) {
+                      return DropdownMenuItem<String>(
+                        value: volume,
+                        child: Text(volume.toString()),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedVolume = newValue;
+                      });
+                    },
+                  ),
+                ),
                 CustomTextField(
                   hintText: 'Email',
                   inputType: TextInputType.emailAddress,
@@ -111,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 45),
                 CustomButton(
-                  onTap: () {
+                  onTap: () async {
                     setState(() {
                       shouldValidate = true;
                     });
@@ -120,14 +148,68 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         isLogging = true;
                       });
+                      Map<String, dynamic> data = {
+                        "email": email,
+                        "password": password
+                      };
+
+                      Map<String, String> map = {
+                        "Banque de sang":
+                            "https://blood4all-backend.vercel.app/api/auth/bloodbank/signin",
+                        "Médécin":
+                            "https://blood4all-backend.vercel.app/api/auth/doctor/signin",
+                        "Patient":
+                            "https://blood4all-backend.vercel.app/api/auth/user/signin",
+                      };
+
+                      FetchData f = await LoginController()
+                          .login(map[_selectedVolume]!, data);
+
+                      if (f.error == "") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Création de compte avec succès !",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                        navigateToNextPage(context, const BloodBankPage());
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Erreur de création de compte",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      setState(() {
+                        isLogging = false;
+                      });
                     }
                   },
-                  text: "Connexion",
+                  child: Center(
+                    child: isLogging
+                        ? const CircularProgressIndicator()
+                        : const Text(
+                            "Envoyer",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
-               
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -146,11 +228,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       onTap: () {
                         Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignUpScreen(),)
-                            );
-
-
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpScreen(),
+                            ));
                       },
                     ),
                   ],

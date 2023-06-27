@@ -10,15 +10,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 10),
-        () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => OnboardingScreen()));
-        },
+    Future.delayed(
+      const Duration(seconds: 10),
+      () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const OnboardingScreen()));
+      },
     );
   }
 
@@ -26,12 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Image(image: AssetImage("assets/images/OnboardLogo.png"),
+          children: [
+            Image(
+              image: AssetImage("assets/images/OnboardLogo.png"),
             ),
             SizedBox(
               height: 8,
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SpinKitThreeBounce(
               color: Colors.red,
               size: 30.0,
-          ),
+            ),
           ],
         ),
       ),

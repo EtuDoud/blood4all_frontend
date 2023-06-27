@@ -81,9 +81,9 @@ class _MyFormPageState extends State<MyFormPage> {
             width: MediaQuery.of(context).size.width,
             height: 250,
             color: const Color(0xff153565),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Center(
                     child: Text(
                   "Formulaire de recherche",

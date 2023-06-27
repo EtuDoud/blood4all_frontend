@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:blood4all/Screens/Login/login.dart';
+import 'package:blood4all/Screens/blood_bank/blood_bank.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/password_field.dart';
 import 'package:blood4all/Screens/resultScreen/widgets/fields/textfield.dart';
-import 'package:blood4all/Screens/searchscreen/researchscreen.dart';
 import 'package:blood4all/Screens/utils/validators.dart';
 import 'package:blood4all/Widgets/button.dart';
 import 'package:blood4all/core/controllers/login_controller.dart';
@@ -173,7 +173,7 @@ class _BloodBankSignUpState extends State<BloodBankSignUp> {
                             ),
                           ),
                         );
-                        navigateToNextPage(context, const MyFormPage());
+                        navigateToNextPage(context, const BloodBankPage());
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
